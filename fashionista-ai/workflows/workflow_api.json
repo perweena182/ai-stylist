@@ -1,0 +1,461 @@
+{
+  "3": {
+    "inputs": {
+      "seed": 737802218332107,
+      "steps": 35,
+      "cfg": 8,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 1,
+      "model": [
+        "4",
+        0
+      ],
+      "positive": [
+        "6",
+        0
+      ],
+      "negative": [
+        "7",
+        0
+      ],
+      "latent_image": [
+        "5",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "4": {
+    "inputs": {
+      "ckpt_name": "realismEngineSDXL_v30VAE.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "Load Checkpoint"
+    }
+  },
+  "5": {
+    "inputs": {
+      "width": 1024,
+      "height": 1024,
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "Empty Latent Image"
+    }
+  },
+  "6": {
+    "inputs": {
+      "text": "hyper detailed photography. soft light. head portrait (white\nbackground: 1.3), skin details, sharp and in focus,\ngirl chinese student,\nshort (blue: 1.4) wavy hair,\nbig eyes ,\nslim nose,\ncute,\nbeautiful \n",
+      "clip": [
+        "4",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "7": {
+    "inputs": {
+      "text": "(worst quality, Low quality, normal quality, lowres, Low details,\noversaturated, undersaturated, overexposed, underexposed, grayscale,\n bad photo, bad photography, bad art: 1.4), (watermark, signature,\ntext font, username, error, logo, words, letters, digits, autograph,\ntrademark, name: 1.2), (blur, blurry, grainy), morbid, ugly,\nasymmetrical, mutated malformed, mutilated, poorly lit, bad shadow,\ndraft, cropped, out of frame, cut off, censored, jpeg artefacts, out\nof focus, glitch, duplicate, (airbrushed, cartoon, anime, semi-\nrealistic, cgi, render, blender, digital art, manga, amateur: 1.3),\n(3D , 3D Game, 3D Game Scene, 3D Character: 1.1), acne\n",
+      "clip": [
+        "4",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "8": {
+    "inputs": {
+      "samples": [
+        "3",
+        0
+      ],
+      "vae": [
+        "4",
+        2
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "10": {
+    "inputs": {
+      "weight": 1.5,
+      "weight_faceidv2": 1.5,
+      "weight_type": "linear",
+      "combine_embeds": "concat",
+      "start_at": 0,
+      "end_at": 1,
+      "embeds_scaling": "V only",
+      "model": [
+        "50",
+        0
+      ],
+      "ipadapter": [
+        "50",
+        1
+      ],
+      "image": [
+        "8",
+        0
+      ],
+      "attn_mask": [
+        "21",
+        0
+      ],
+      "clip_vision": [
+        "23",
+        0
+      ],
+      "insightface": [
+        "48",
+        0
+      ]
+    },
+    "class_type": "IPAdapterFaceID",
+    "_meta": {
+      "title": "IPAdapter FaceID"
+    }
+  },
+  "17": {
+    "inputs": {
+      "image": "image_01.png",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image"
+    }
+  },
+  "18": {
+    "inputs": {
+      "image": "$18-0",
+      "images": [
+        "8",
+        0
+      ]
+    },
+    "class_type": "PreviewBridge",
+    "_meta": {
+      "title": "Preview Bridge (Image)"
+    }
+  },
+  "19": {
+    "inputs": {
+      "resolution": 1024,
+      "image": [
+        "18",
+        0
+      ]
+    },
+    "class_type": "OneFormer-COCO-SemSegPreprocessor",
+    "_meta": {
+      "title": "OneFormer COCO Segmentor"
+    }
+  },
+  "20": {
+    "inputs": {
+      "images": [
+        "19",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "21": {
+    "inputs": {
+      "channel": "red",
+      "image": [
+        "19",
+        0
+      ]
+    },
+    "class_type": "ImageToMask",
+    "_meta": {
+      "title": "Convert Image to Mask"
+    }
+  },
+  "23": {
+    "inputs": {
+      "clip_name": "CLIP-ViT-H-14-laion2B-s32B-b79K.safetensors"
+    },
+    "class_type": "CLIPVisionLoader",
+    "_meta": {
+      "title": "Load CLIP Vision"
+    }
+  },
+  "26": {
+    "inputs": {
+      "weight": 0.3,
+      "start_at": 0,
+      "end_at": 1,
+      "weight_type": "standard",
+      "model": [
+        "49",
+        0
+      ],
+      "ipadapter": [
+        "49",
+        1
+      ],
+      "image": [
+        "8",
+        0
+      ],
+      "attn_mask": [
+        "21",
+        0
+      ]
+    },
+    "class_type": "IPAdapter",
+    "_meta": {
+      "title": "IPAdapter"
+    }
+  },
+  "27": {
+    "inputs": {
+      "ipadapter_file": "ip-adapter-plus-face_sdxl_vit-h.safetensors"
+    },
+    "class_type": "IPAdapterModelLoader",
+    "_meta": {
+      "title": "IPAdapter Model Loader"
+    }
+  },
+  "30": {
+    "inputs": {
+      "ipadapter_file": "ip-adapter-faceid-plusv2_sd15.bin"
+    },
+    "class_type": "IPAdapterModelLoader",
+    "_meta": {
+      "title": "IPAdapter Model Loader"
+    }
+  },
+  "33": {
+    "inputs": {
+      "text": "sitting in cafe,wear a red frock, full length image with face clearly visible,visible cleavage\n",
+      "clip": [
+        "4",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "34": {
+    "inputs": {
+      "text": "(worst quality, Low quality, normal quality, lowres, Low details,\noversaturated, undersaturated, overexposed, underexposed, grayscale,\n bad photo, bad photography, bad art: 1.4), (watermark, signature,\ntext font, username, error, logo, words, letters, digits, autograph,\ntrademark, name: 1.2), (blur, blurry, grainy), morbid, ugly,\nasymmetrical, mutated malformed, mutilated, poorly lit, bad shadow,\ndraft, cropped, out of frame, cut off, censored, jpeg artefacts, out\nof focus, glitch, duplicate, (airbrushed, cartoon, anime, semi-\nrealistic, cgi, render, blender, digital art, manga, amateur: 1.3),\n(3D , 3D Game, 3D Game Scene, 3D Character: 1.1), acne\n",
+      "clip": [
+        "4",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "35": {
+    "inputs": {
+      "seed": 442125528409144,
+      "steps": 35,
+      "cfg": 8,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "normal",
+      "denoise": 1,
+      "model": [
+        "54",
+        0
+      ],
+      "positive": [
+        "33",
+        0
+      ],
+      "negative": [
+        "34",
+        0
+      ],
+      "latent_image": [
+        "36",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "36": {
+    "inputs": {
+      "width": 1024,
+      "height": 1024,
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "Empty Latent Image"
+    }
+  },
+  "37": {
+    "inputs": {
+      "samples": [
+        "35",
+        0
+      ],
+      "vae": [
+        "4",
+        2
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "38": {
+    "inputs": {
+      "images": [
+        "37",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "48": {
+    "inputs": {
+      "provider": "CPU",
+      "model_name": "buffalo_l"
+    },
+    "class_type": "IPAdapterInsightFaceLoader",
+    "_meta": {
+      "title": "IPAdapter InsightFace Loader"
+    }
+  },
+  "49": {
+    "inputs": {
+      "preset": "PLUS (high strength)",
+      "model": [
+        "10",
+        0
+      ]
+    },
+    "class_type": "IPAdapterUnifiedLoader",
+    "_meta": {
+      "title": "IPAdapter Unified Loader"
+    }
+  },
+  "50": {
+    "inputs": {
+      "preset": "FACEID",
+      "lora_strength": 0.6,
+      "provider": "CPU",
+      "model": [
+        "4",
+        0
+      ]
+    },
+    "class_type": "IPAdapterUnifiedLoaderFaceID",
+    "_meta": {
+      "title": "IPAdapter Unified Loader FaceID"
+    }
+  },
+  "51": {
+    "inputs": {
+      "resolution": 1024,
+      "image": [
+        "17",
+        0
+      ]
+    },
+    "class_type": "UniFormer-SemSegPreprocessor",
+    "_meta": {
+      "title": "UniFormer Segmentor"
+    }
+  },
+  "52": {
+    "inputs": {
+      "images": [
+        "51",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "53": {
+    "inputs": {
+      "channel": "red",
+      "image": [
+        "51",
+        0
+      ]
+    },
+    "class_type": "ImageToMask",
+    "_meta": {
+      "title": "Convert Image to Mask"
+    }
+  },
+  "54": {
+    "inputs": {
+      "weight": 0.6,
+      "start_at": 0,
+      "end_at": 1,
+      "weight_type": "standard",
+      "model": [
+        "26",
+        0
+      ],
+      "ipadapter": [
+        "55",
+        1
+      ],
+      "image": [
+        "17",
+        0
+      ],
+      "attn_mask": [
+        "53",
+        0
+      ]
+    },
+    "class_type": "IPAdapter",
+    "_meta": {
+      "title": "IPAdapter"
+    }
+  },
+  "55": {
+    "inputs": {
+      "preset": "PLUS (high strength)",
+      "model": [
+        "26",
+        0
+      ]
+    },
+    "class_type": "IPAdapterUnifiedLoader",
+    "_meta": {
+      "title": "IPAdapter Unified Loader"
+    }
+  }
+}
